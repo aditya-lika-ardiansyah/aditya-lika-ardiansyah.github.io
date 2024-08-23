@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player - 404 Not Found</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      background-color: #313131;
+      font-family: "Roboto", sans-serif;
+      margin: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      color: #efefef;
+      font-size: 50px;
+      font-weight: bold;
+      font-family: monospace;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: .5s linear;
+    }
+    h1 span {
+      color: #efefef;
+    }
+    h1:hover span {
+      color: white;
+      text-shadow: 0 0 5px #fff, 0 0 1px white, 0 0 10px black;
+    }
+    p {
+      color: #bbb;
+      font-size: 20px;
+    }
+    .music-player {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cover {
+      width: 200px;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 15px;
+      box-shadow: 0px 7px 14px rgba(0, 0, 0, 0.5);
+    }
+    .title {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #efefef;
+    }
+    audio {
+      margin-top: 20px;
+      width: 300px;
+    }
+    .link {
+      display: inline-block;
+      background-color: #e6e6e6;
+      color: #1c1c1c;
+      font-size: 20px;
+      font-family: inherit;
+      text-align: center;
+      text-decoration: none;
+      overflow: hidden;
+      transition: 0.5s;
+      margin-top: 20px;
+      padding: 17px;
+      border: solid #e6e6e6 2px;
+      border-radius: 55px;
+      box-shadow: 0px 7px 14px rgba(255, 255, 255, 255);
+    }
+    .link:hover {
+      background-color: #1c1c1c;
+      color: #e6e6e6;
+      box-shadow: 0px 7px 14px #1c1c1c;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="music-player">
+    <div class="cover" style="background-image: url('https://hotstorage.non2.eu.org/api/download?url=https://archive.org/download/Arc.BiHU.0x/0x/Website%20Dump/Music%20Dump/Walking%20Back%20Home%20-%20Vira%20Talisa/cover.jpg');"></div>
+    <div class="title">Walking Back Home - Vira Talisa</div>
+    <audio controls>
+      <source src="https://hotstorage.non2.eu.org/api/download?url=https://archive.org/download/Arc.BiHU.0x/0x/Website%20Dump/Music%20Dump/Walking%20Back%20Home%20-%20Vira%20Talisa/04%20Walking%20Back%20Home.m4a" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  
+  <a class="link" href="/">Go Back</a>
+</body>
+</html>
