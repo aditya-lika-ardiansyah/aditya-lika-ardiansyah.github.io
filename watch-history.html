@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@700&family=Protest+Guerrilla&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SUSE&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Protest Guerrilla', sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 20px;
+            color: #FFFFFF;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #313131;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #000000;
+        }
+        .movie {
+            background-color: #FFFFFF;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 30px;
+            text-align: left;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .movie-title {
+            font-family: 'Martian Mono', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000000;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .movie-title:hover {
+            color: #007BFF;
+            text-decoration: underline;
+        }
+        .movie-year, .watched-at {
+            font-family: "SUSE", sans-serif;
+            font-size: 16px;
+        }
+        .statistics {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .stat-item {
+            background: #FFFFFF;
+            color: #000000;
+            padding: 10px;
+            border-radius: 30px;
+            width: 40%;
+            font-family: 'Protest Guerrilla', sans-serif;
+        }
+        .small-text {
+            font-size: 18px;
+            font-family: 'Martian Mono', monospace;
+        }
+        .large-text {
+            font-size: 48px;
+            font-weight: bold;
+            font-family: 'Protest Guerrilla', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="movie-list">
+    <!-- Movie entries will be inserted here by JavaScript -->
+</div>
+
+<div class="statistics" id="movie-statistics">
+    <!-- Statistics will be inserted here by JavaScript -->
+</div>
+
+<script>
+    // Function to convert minutes to days, hours, and minutes
+    function convertMinutes(minutes) {
+        const days = Math.floor(minutes / 1440); // 1440 minutes in a day
+        const hours = Math.floor((minutes % 1440) / 60); // 60 minutes in an hour
+        const mins = minutes % 60;
+
+        return { days, hours, minutes: mins };
+    }
+
+    // Fetch the movie history JSON
+    fetch('https://archive.org/download/Arc.BiHU.0x/0x/0x/JSON/history-watch.json') // Replace with your JSON file path
+        .then(response => response.json())
+        .then(data => {
+            const movieList = document.getElementById('movie-list');
+
+            // Limit display to only 5 items
+            const maxItems = 5;
+            data.slice(0, maxItems).forEach(item => {
+                const movieElement = document.createElement('div');
+                movieElement.classList.add('movie');
+
+                // Get and format the watched time
+                const watchedAt = new Date(item.watched_at);
+                const formattedDate = watchedAt.toLocaleDateString();
+                const formattedTime = watchedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                // Create URL for Trakt.tv
+                const traktUrl = `https://trakt.tv/movies/${item.movie.ids.trakt}`;
+
+                movieElement.innerHTML = `
+                    <a href="${traktUrl}" class="movie-title" target="_blank">${item.movie.title}</a>
+                    <div class="movie-year">Rilis: ${item.movie.year}</div>
+                    <div class="watched-at">Ditonton Pada: ${formattedDate} Pukul ${formattedTime}</div>
+                `;
+                
+                movieList.appendChild(movieElement);
+            });
+
+            // Fetch the statistics JSON
+            return fetch('https://ia601502.us.archive.org/17/items/Arc.BiHU.0x/0x/0x/JSON/statistics.json');
+        })
+        .then(response => response.json())
+        .then(stats => {
+            const movieStatistics = document.getElementById('movie-statistics');
+
+            // Convert minutes to days, hours, and minutes
+            const { days, hours, minutes } = convertMinutes(stats.movies.minutes);
+
+            // Create statistics elements
+            const totalWatchedMovies = document.createElement('div');
+            totalWatchedMovies.classList.add('stat-item');
+            totalWatchedMovies.innerHTML = `
+                <div class="small-text">Telah Menonton</div>
+                <div class="large-text">${stats.movies.watched}</div>
+                <div class="small-text">Film</div>
+            `;
+
+            const totalTimeWatched = document.createElement('div');
+            totalTimeWatched.classList.add('stat-item');
+            totalTimeWatched.innerHTML = `
+                <div class="small-text">Total Menonton</div>
+                <div class="large-text">${days} Hari</div>
+                <div class="small-text">${hours} Jam</div>
+            `;
+
+            // Append statistics to the statistics container
+            movieStatistics.appendChild(totalWatchedMovies);
+            movieStatistics.appendChild(totalTimeWatched);
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+</script>
+
+</body>
+  </html>
