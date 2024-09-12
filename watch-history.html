@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
             padding: 20px;
             border-radius: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #FFFFFF;
+            color: #000000;
         }
         .movie {
             background-color: #4c4c4c;
@@ -36,29 +36,27 @@
             font-size: 24px;
             font-weight: bold;
             text-decoration: none;
-            color: #FFFFFF;
+            color: #000000;
             display: block;
             margin-bottom: 10px;
         }
         .movie-title:hover {
-            color: #333333;
-            text-decoration: bold;
+            color: #007BFF;
+            text-decoration: underline;
         }
         .movie-year, .watched-at {
             font-family: "SUSE", sans-serif;
             font-size: 16px;
-            color: #FFFFFF;
         }
         .statistics {
             display: flex;
             justify-content: space-between;
             margin-top: 40px;
             text-align: center;
-            color: #FFFFFF;
         }
         .stat-item {
             background: #4c4c4c;
-            color: #FFFFFF;
+            color: #000000;
             padding: 10px;
             border-radius: 30px;
             width: 40%;
@@ -73,6 +71,36 @@
             font-weight: bold;
             font-family: 'Protest Guerrilla', sans-serif;
         }
+        .button {
+            display: block;
+            width: calc(100% - 40px); /* Adjust width to fit container */
+            padding: 10px;
+            margin: 20px auto; /* Center and space from content */
+            text-align: center;
+            font-family: 'Martian Mono', sans-serif;
+            font-size: 18px;
+            color: #FFFFFF;
+            background-color: #262626; /* Match body background color */
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            position: relative;
+        }
+        .button:hover {
+            background-color: #4c4c4c;
+        }
+        .button svg {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: #FFFFFF;
+        }
+        .button span {
+            margin-left: 30px; /* Space for the SVG icon */
+        }
     </style>
 </head>
 <body>
@@ -80,7 +108,10 @@
 <div class="container" id="movie-list">
     <!-- Movie entries will be inserted here by JavaScript -->
 </div>
-
+<a href="https://trakt.tv/users/adityazu/history" class="button">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></svg>
+        <span>Selengkapnya...</span>
+    </a>
 <div class="statistics" id="movie-statistics">
     <!-- Statistics will be inserted here by JavaScript -->
 </div>
